@@ -14,7 +14,7 @@ export async function PUT({ params, request }) {
 
 		if (isExisting) {
 			isCompleted = await prisma.user.update({ data: { email: email, name: name } });
-			status = 204;
+			status = 200;
 		} else {
 			isCompleted = await prisma.user.create({ data: { email: email, name: name } });
 			status = 201;
@@ -26,7 +26,7 @@ export async function PUT({ params, request }) {
 	}
 
 	return isCompleted
-		? json({ message: 'You have updated a user' }, { status: status })
+		? new Response({ message: 'You have successfully edited user' }, { status: status })
 		: new error(500, 'There was an error in updating the user');
 }
 
@@ -52,7 +52,7 @@ export async function PATCH({ params, request }) {
 	}
 
 	return isCompleted
-		? json({ message: 'You have updated a user' }, { status: 200 })
+		? new Response({ message: 'You have successfully edited user' }, { status: 200 })
 		: new error(500, 'There was an error in updating the user');
 }
 
@@ -76,6 +76,6 @@ export async function DELETE({ params }) {
 	}
 
 	return isCompleted
-		? json({ message: 'You have deleted a user' }, { status: 200 })
+		? new Response({ message: 'You have successfully edited user' }, { status: 200 })
 		: new error(500, 'There was an error in deleting the user');
 }
